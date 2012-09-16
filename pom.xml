@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>swing-console</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Swing Console</name>
 	<description>A lightweight Swing text console component for Java</description>
 	
@@ -10,6 +10,8 @@
 		<artifactId>mikera-pom</artifactId>
 		<version>0.0.1</version>
 	</parent>
+
+	<url>https://github.com/mikera/${project.artifactId}.git</url>
 
 	<licenses>
 		<license>
@@ -25,8 +27,4 @@
 			<version>0.0.2</version>
 		</dependency>
 	</dependencies>
-
-  <scm>
-    <tag>swing-console-0.0.2</tag>
-  </scm>
 </project>
