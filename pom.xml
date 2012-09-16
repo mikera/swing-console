@@ -6,6 +6,12 @@
 
 	<name>Swing Console</name>
 	<description>A lightweight Swing text console component for Java</description>
+	
+	<parent>
+		<groupId>net.mikera</groupId>
+		<artifactId>mikera-pom</artifactId>
+		<version>0.0.1</version>
+	</parent>
 
 	<url>https://github.com/mikera/${project.artifactId}.git</url>
 
