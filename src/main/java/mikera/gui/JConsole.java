@@ -53,31 +53,46 @@ public class JConsole extends JComponent {
 	private boolean cursorInverted=true;
 	
 	private int curPosition=0;
-	private Font currentFont=DEFAULT_FONT;
+	private Font mainFont=null;
+	private Font currentFont=null;
 	private Color curForeground=DEFAULT_FOREGROUND;
 	private Color curBackground=DEFAULT_BACKGROUND;
 	
 	private Timer blinkTimer;
 
 	public JConsole(int columns, int rows) {
+		setMainFont(DEFAULT_FONT);
+		setFont(mainFont);
 		init(columns,rows);
 		if (DEFAULT_BLINK_ON) {
 			setCursorBlink(true);
 		}
 	}
 	
+	private void setMainFont(Font font) {
+		mainFont=font;
+		
+		FontRenderContext fontRenderContext=new FontRenderContext(mainFont.getTransform(),false,false);
+	    Rectangle2D charBounds = mainFont.getStringBounds("X", fontRenderContext);
+	    fontWidth=(int)charBounds.getWidth();
+	    fontHeight=(int)charBounds.getHeight();
+	    fontYOffset=-(int)charBounds.getMinY();	
+	    repaint();
+	}
+
 	private class TimerAction implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (cursorBlinkOn) {
+			if (cursorBlinkOn&&isShowing()) {
 				cursorInverted=!cursorInverted;
-				repaint();
+				repaintRegion(getCursorX(),getCursorY(),1,1);
 			} else {
 				blinkTimer.stop();
 				cursorInverted=true;
 			}
 		}		
 	}
+	
 	
 	public void setCursorBlink(boolean blink) {
 		if (blink) {
@@ -129,7 +144,21 @@ public class JConsole extends JComponent {
 		return columns;
 	}
 	
-	public void init(int columns, int rows) {
+	public int getFontWidth() {
+		return fontWidth;
+	}
+	
+	public int getFontHeight() {
+		return fontHeight;
+	}
+	
+	public void repaintRegion(int x, int y, int width, int height) {
+		int fw = getFontWidth();
+		int fh=getFontHeight();
+		repaint(x*fw, y*fh, width*fw, height*fh);
+	}
+	
+	protected void init(int columns, int rows) {
 		size=rows*columns;
 		this.rows=rows;
 		this.columns=columns;
@@ -142,13 +171,6 @@ public class JConsole extends JComponent {
 		Arrays.fill(foreground,DEFAULT_FOREGROUND);
 		Arrays.fill(font,DEFAULT_FONT);
 		Arrays.fill(text,' ');
-		
-		currentFont=DEFAULT_FONT;
-		FontRenderContext fontRenderContext=new FontRenderContext(DEFAULT_FONT.getTransform(),false,false);
-	    Rectangle2D charBounds = DEFAULT_FONT.getStringBounds("X", fontRenderContext);
-	    fontWidth=(int)charBounds.getWidth();
-	    fontHeight=(int)charBounds.getHeight();
-	    fontYOffset=-(int)charBounds.getMinY();
 	    
 	    setPreferredSize(new Dimension(columns*fontWidth, rows*fontHeight));
 	}
@@ -249,7 +271,9 @@ public class JConsole extends JComponent {
 	
 
 	
-	
+	/**
+	 * Redirects System.out to this console by calling System.setOut
+	 */
 	public void captureStdOut() {
 		PipedInputStream pipedInput=new PipedInputStream();
 		PipedOutputStream pipedOutput;
