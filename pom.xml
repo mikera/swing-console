@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>swing-console</groupId>
+	<groupId>net.mikera</groupId>
 	<artifactId>swing-console</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Swing Console</name>
 	<description>A lightweight Swing text console component for Java</description>
 
-	<url>https://github.com/mikera/mikera.git</url>
+	<url>https://github.com/mikera/${project.artifactId}.git</url>
 
 	<scm>
 		<connection>scm:git:git@github.com:mikera/${project.artifactId}.git</connection>
@@ -36,4 +36,11 @@
 		</plugins>
 	</build>
 
+	<dependencies>
+		<dependency>
+			<groupId>net.mikera</groupId>
+			<artifactId>mikera-gui</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+	</dependencies>
 </project>
