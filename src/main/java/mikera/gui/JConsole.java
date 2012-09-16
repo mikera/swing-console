@@ -12,10 +12,6 @@ import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 

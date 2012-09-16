@@ -28,7 +28,7 @@ public class ConsoleApp {
     	jc.setCursorPos(0, 0);
 
     	JFrame f=Tools.showFillingComponent(jc);
-		// f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   	
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   	
     }
 
 }
