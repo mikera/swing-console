@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -27,7 +29,7 @@ import javax.swing.Timer;
  * @author Mike Anderson
  *
  */
-public class JConsole extends JComponent {
+public class JConsole extends JComponent implements HierarchyListener  {
 	private static final long serialVersionUID = 3571518591759968333L;
 	
 	private static final Color DEFAULT_FOREGROUND=Color.LIGHT_GRAY;
@@ -93,15 +95,25 @@ public class JConsole extends JComponent {
 		}		
 	}
 	
+	private void stopBlinking() {
+		if (blinkTimer!=null) {
+			blinkTimer.stop();
+			cursorInverted=true;
+		}	
+	}
+
+	private void startBlinking() {
+		getTimer().start();
+	}
+	
 	
 	public void setCursorBlink(boolean blink) {
 		if (blink) {
 			cursorBlinkOn=true;
-			getTimer().start();
+			startBlinking();
 		} else {
 			cursorBlinkOn=false;
-			getTimer().stop();
-			cursorInverted=true;
+			stopBlinking();
 		}
 	}
 	
@@ -114,11 +126,24 @@ public class JConsole extends JComponent {
 			blinkTimer=new Timer(DEFAULT_BLINKRATE, new TimerAction());
 			blinkTimer.setRepeats(true);
 			if (cursorBlinkOn) {
-				blinkTimer.start();
+				startBlinking();
 			}
 		}
 		return blinkTimer;
 	}
+	
+	@Override
+    public void addNotify() {
+        super.addNotify();
+        addHierarchyListener(this);
+    }
+
+	@Override
+	public void removeNotify() {
+    	removeHierarchyListener(this);
+        super.removeNotify();
+    }
+
 	
 	public  void setRows(int rows) {
 		init(columns,rows);
@@ -275,47 +300,25 @@ public class JConsole extends JComponent {
 	 * Redirects System.out to this console by calling System.setOut
 	 */
 	public void captureStdOut() {
-		PipedInputStream pipedInput=new PipedInputStream();
-		PipedOutputStream pipedOutput;
-		try {
-			pipedOutput = new PipedOutputStream(pipedInput);
-		} catch (IOException e) {
-			throw new Error(e);
-		}
-		PrintStream printStream=new PrintStream(pipedOutput);
-		InputStreamReader inputStreamReader=new InputStreamReader(pipedInput);
+		PrintStream ps = new PrintStream(System.out) {  
+			public void println(String x) {  
+				writeln(x);  
+			}  
+		};  
 		
-		System.setOut(printStream);
-		
-		new Thread(new OutputHandler(inputStreamReader)).start();
+		System.setOut(ps);
 	}
 	
-	private class OutputHandler implements Runnable {
-		final InputStreamReader reader;
-		
-		public OutputHandler(InputStreamReader inputStreamReader) {
-			reader=inputStreamReader;
-		}
-		
-		public void run() {
-			while (true) {
-				try {
-					char c;
-					c = (char) reader.read();
-					write(c);
-					repaint();
-				} catch (Exception e) {
-					// return, presumably because program ended.
-					return;
-				}
-			}
-		}	
-	}
 
 	public void write(char c) {
 		int pos=curPosition;
 		pos=writeChar(c,pos);
 		curPosition=pos;	
+	}
+	
+	public void writeln(String line) {
+		write(line);
+		write ('\n');
 	}
 	
 	/**
@@ -362,5 +365,18 @@ public class JConsole extends JComponent {
 		}
 		curPosition=pos;
 	}
+
+	@Override
+	public void hierarchyChanged(HierarchyEvent e) {
+		 if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
+			 if (isShowing()) {
+				 startBlinking();
+			 } else {
+				 stopBlinking();
+			 }
+		 }
+	}
+
+
 
 }

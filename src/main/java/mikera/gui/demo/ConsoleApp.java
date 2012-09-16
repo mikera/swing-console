@@ -16,8 +16,10 @@ public class ConsoleApp {
     	jc.write("Hello World\n");
     	jc.write("Hello World\n",Color.BLACK,Color.MAGENTA);
     	jc.write("Hello World\n",Color.GREEN,Color.BLACK);
-    	//System.out.println("Normal output");
+
+    	System.out.println("Normal output");
     	jc.captureStdOut();
+    	System.out.println("Captured output");
     	
     	
     	// brown box
@@ -26,8 +28,7 @@ public class ConsoleApp {
     	jc.setCursorPos(0, 0);
 
     	JFrame f=Tools.showFillingComponent(jc);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	
+		// f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   	
     }
 
 }
