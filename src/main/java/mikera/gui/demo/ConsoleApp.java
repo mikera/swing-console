@@ -2,6 +2,8 @@ package mikera.gui.demo;
 
 import java.awt.Color;
 
+import javax.swing.JFrame;
+
 import mikera.gui.JConsole;
 import mikera.gui.Tools;
 
@@ -23,7 +25,8 @@ public class ConsoleApp {
     	
     	jc.setCursorPos(0, 0);
 
-    	Tools.showFillingComponent(jc);
+    	JFrame f=Tools.showFillingComponent(jc);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
     }
 
