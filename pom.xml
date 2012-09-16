@@ -2,7 +2,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>swing-console</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
-
 	<name>Swing Console</name>
 	<description>A lightweight Swing text console component for Java</description>
 	
@@ -12,33 +11,12 @@
 		<version>0.0.1</version>
 	</parent>
 
-	<url>https://github.com/mikera/${project.artifactId}.git</url>
-
-	<scm>
-		<connection>scm:git:git@github.com:mikera/${project.artifactId}.git</connection>
-		<url>scm:git:git@github.com:mikera/${project.artifactId}.git</url>
-		<developerConnection>scm:git:git@github.com:mikera/${project.artifactId}.git</developerConnection>
-	</scm>
-
 	<licenses>
 		<license>
 			<name>GNU Lesser General Public License (LGPL)</name>
 			<url>http://www.gnu.org/licenses/lgpl.html</url>
 		</license>
 	</licenses>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 	<dependencies>
 		<dependency>
