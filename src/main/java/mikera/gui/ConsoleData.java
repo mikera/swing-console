@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author Mike
  */
 public final class ConsoleData {
-	public int size;
+	private int capacity=0;
 	public int rows;
 	public int columns;
 	public Color[] background;
@@ -21,16 +21,34 @@ public final class ConsoleData {
 
 	ConsoleData() {
 	}
+	
+	private void ensureCapacity(int minCapacity) {
+		if (capacity>=minCapacity) return;
+		
+		char[] newText=new char[minCapacity];
+		Color[] newBackground=new Color[minCapacity];
+		Color[]	newForeground=new Color[minCapacity];
+		Font[] newFont=new Font[minCapacity];		
+		
+		int size=rows*columns;
+		if (size>0) {
+			System.arraycopy(text, 0, newText, 0, size);
+			System.arraycopy(foreground, 0, newForeground, 0, size);
+			System.arraycopy(background, 0, newBackground, 0, size);
+			System.arraycopy(font, 0, newFont, 0, size);
+		}
+		
+		text=newText;
+		foreground=newForeground;
+		background=newBackground;
+		font=newFont;
+		capacity=minCapacity;
+	}
 
 	void init(int columns, int rows) {
-		size=rows*columns;
+		ensureCapacity(rows*columns);
 		this.rows=rows;
 		this.columns=columns;
-		
-		text=new char[size];
-		background=new Color[size];
-		foreground=new Color[size];
-		font=new Font[size];
 	}
 	
 	/**
