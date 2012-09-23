@@ -1,9 +1,7 @@
 package mikera.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.util.Arrays;
 
 /**
  * Class used for storing console data
@@ -20,6 +18,7 @@ public final class ConsoleData {
 	public char[] text;
 
 	ConsoleData() {
+		// create empty console data
 	}
 	
 	private void ensureCapacity(int minCapacity) {
