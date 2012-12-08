@@ -2,11 +2,8 @@ package mikera.gui.demo;
 
 import java.awt.Color;
 
-import javax.swing.JFrame;
-
 import mikera.gui.Frames;
 import mikera.gui.JConsole;
-import mikera.gui.Tools;
 
 public class ConsoleApp {
 
