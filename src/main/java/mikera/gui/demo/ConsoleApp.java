@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
+import mikera.gui.Frames;
 import mikera.gui.JConsole;
 import mikera.gui.Tools;
 
@@ -27,8 +28,7 @@ public class ConsoleApp {
     	
     	jc.setCursorPos(0, 0);
 
-    	JFrame f=Tools.showFillingComponent(jc);
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);   	
+    	Frames.display(jc,"JConsole test application");
     }
 
 }
