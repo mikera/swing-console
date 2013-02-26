@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import mikera.gui.Frames;
 import mikera.gui.JConsole;
+import mikera.image.Colours;
+import mikera.util.Rand;
 
 public class ConsoleApp {
 
@@ -26,6 +28,26 @@ public class ConsoleApp {
     	jc.setCursorPos(0, 0);
 
     	Frames.display(jc,"JConsole test application");
+    	
+    	int SECS=3;
+    	long start=System.currentTimeMillis();
+    	int iterations=0;
+    	
+    	while (start>(System.currentTimeMillis()-1000*SECS)) {
+    		for (int y=10; y<20; y++) {
+    			for (int x=10; x<80; x++) {
+    				jc.fillArea((char)Rand.r(256), 
+    						Colours.getColor(Rand.nextInt()), 
+    						Colours.getColor(Rand.nextInt()), 
+    						x, y, 1, 1);
+    			}
+    		}
+    		jc.repaint();
+    		iterations++;
+    	}
+    	
+    	jc.setCursorPos(0, 6);
+    	System.out.println("FPS="+iterations/SECS);
     }
 
 }
