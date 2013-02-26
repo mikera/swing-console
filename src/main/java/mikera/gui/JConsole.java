@@ -21,6 +21,11 @@ import javax.swing.Timer;
 /**
  * Class implementing a Swing-based text console
  * 
+ * Principles:
+ * - provides a fixed number of rows and columns, but can be resized
+ * - each cell can have its own foreground and background colour
+ * - The main font determines the grid size
+ * 
  * @author Mike Anderson
  * 
  */
@@ -29,8 +34,7 @@ public class JConsole extends JComponent implements HierarchyListener {
 
 	private static final Color DEFAULT_FOREGROUND = Color.LIGHT_GRAY;
 	private static final Color DEFAULT_BACKGROUND = Color.BLACK;
-	private static final Font DEFAULT_FONT = new Font("Courier New",
-			Font.PLAIN, 20);
+	private static final Font DEFAULT_FONT = new Font("Courier New", Font.PLAIN, 20);
 	private static final int DEFAULT_BLINKRATE = 200;
 	private static final boolean DEFAULT_BLINK_ON = true;
 
