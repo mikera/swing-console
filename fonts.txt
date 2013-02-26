@@ -1,0 +1,7 @@
+Good fonts for roguelikes:
+
+Consolas: Classice console font.
+Courier New: General purpose font. Lots of foreign characters / symbols, a few special symbols
+Euphemia: Lots of nice curvy characters and symbols
+Ebrima: Lots of nice "magical" symbols
+Dotum: lots of chinese characters
