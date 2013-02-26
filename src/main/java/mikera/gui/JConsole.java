@@ -226,7 +226,7 @@ public class JConsole extends JComponent implements HierarchyListener {
 	}
 
 	@Override
-	public void paint(Graphics graphics) {
+	public void paintComponent(Graphics graphics) {
 		Graphics2D g = (Graphics2D) graphics;
 		Rectangle r = g.getClipBounds();
 
