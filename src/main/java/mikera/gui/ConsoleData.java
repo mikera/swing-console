@@ -52,7 +52,7 @@ public final class ConsoleData {
 	}
 
 	/**
-	 * Sets a single chatacter position
+	 * Sets a single character position
 	 */
 	public void setDataAt(int column, int row, char c, Color fg, Color bg,
 			Font f) {
