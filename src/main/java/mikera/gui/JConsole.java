@@ -287,9 +287,10 @@ public class JConsole extends JComponent implements HierarchyListener {
 
 				// draw chars up to this point
 				g.setColor(nfg);
-				g.drawChars(data.text, offset + start, i - start, start
-						* fontWidth, j * fontHeight + fontYOffset);
-
+				for (int k=start; k<i; k++) { 
+					g.drawChars(data.text, offset + k, 1, k
+							* fontWidth, j * fontHeight + fontYOffset);
+				}
 				start = i;
 			}
 		}
