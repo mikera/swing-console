@@ -10,7 +10,7 @@ import mikera.util.Rand;
 public class ConsoleApp {
 
     public static void main(String[] args) {	
-    	JConsole jc=new JConsole(80,25);
+    	JConsole jc=new JConsole(100,40);
     	jc.setCursorVisible(true);
     	jc.setCursorBlink(true);
     	jc.write("Hello World\n");
