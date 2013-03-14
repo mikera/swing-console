@@ -18,6 +18,8 @@ import java.util.Arrays;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
+import mikera.gui.ConsoleData;
+
 /**
  * Class implementing a Swing-based text console
  * 
@@ -37,7 +39,7 @@ public class JConsole extends JComponent implements HierarchyListener {
 	private static final Font DEFAULT_FONT = new Font("Courier New", Font.PLAIN, 18);
 	private static final int DEFAULT_BLINKRATE = 200;
 	private static final boolean DEFAULT_BLINK_ON = true;
-
+ 
 	private ConsoleData data = new ConsoleData();
 
 	private int fontWidth;
@@ -82,6 +84,9 @@ public class JConsole extends JComponent implements HierarchyListener {
 		fontWidth = (int) charBounds.getWidth();
 		fontHeight = (int) charBounds.getHeight();
 		fontYOffset = -(int) charBounds.getMinY();
+		
+		setPreferredSize(new Dimension(data.columns * fontWidth, data.rows * fontHeight));
+
 		repaint();
 	}
 
