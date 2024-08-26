@@ -18,8 +18,6 @@ import java.util.Arrays;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
-import mikera.gui.ConsoleData;
-
 /**
  * Class implementing a Swing-based text console
  * 
