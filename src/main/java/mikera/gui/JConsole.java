@@ -410,6 +410,16 @@ public class JConsole extends JComponent implements HierarchyListener {
 		data.fillArea(c, fg, bg, currentFont, column, row, width, height);
 		repaintArea(column, row, width, height);
 	}
+	
+	public void setChar(char c, Color fg, Color bg, int column, int row) {
+		data.fillArea(c, fg, bg, currentFont, column, row, 1, 1);
+		repaintArea(column, row, 1, 1);
+	}
+	
+	public void setChar(char c, int column, int row) {
+		data.fillArea(c, currentForeground, currentBackground, currentFont, column, row, 1, 1);
+		repaintArea(column, row, 1, 1);
+	}
 
 	@Override
 	public void hierarchyChanged(HierarchyEvent e) {
@@ -420,6 +430,40 @@ public class JConsole extends JComponent implements HierarchyListener {
 				stopBlinking();
 			}
 		}
+	}
+	
+	public void scroll(int dx, int dy) {
+		if ((dx==0)&&(dy==0)) return;
+		boolean forward=(dy>0)||(dx>0); // are we going in forward direction
+		
+		int w=getColumns();
+		int h=getRows();
+		for (int j=0; j<h; j++) {
+			int y=forward?j:h-1-j;
+			int sy=y+dy;
+			boolean seeRow =(sy>=0)&&(sy<h); 
+			for (int i=0; i<w; i++) {
+				int x=forward?i:w-1-i;
+				int sx=x+dx;
+				boolean seeChar=seeRow&&(sx>=0)&&(sx<w);
+				int di = x + y * w;
+				if (seeChar) {
+					int si = sx + sy * w;
+					data.text[di]=data.text[si];
+					data.foreground[di]=data.foreground[si];
+					data.background[di]=data.background[si];
+					data.font[di]=data.font[si];
+				} else {
+					data.text[di]=' ';
+					data.foreground[di]=currentForeground;
+					data.background[di]=currentBackground;
+					data.font[di]=currentFont;
+					
+				}
+			}
+			
+		}
+		repaint();
 	}
 
 }
