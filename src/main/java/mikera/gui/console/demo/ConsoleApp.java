@@ -1,13 +1,14 @@
-package mikera.gui.demo;
+package mikera.gui.console.demo;
 
 import java.awt.Color;
+import java.util.Random;
 
 import mikera.gui.Frames;
-import mikera.gui.JConsole;
+import mikera.gui.console.JConsole;
 import mikera.image.Colours;
-import mikera.util.Rand;
 
 public class ConsoleApp {
+	private static final Random r=new Random();
 
     public static void main(String[] args) {	
     	JConsole jc=new JConsole(100,40);
@@ -36,9 +37,9 @@ public class ConsoleApp {
     	while (start>(System.currentTimeMillis()-1000*SECS)) {
     		for (int y=10; y<20; y++) {
     			for (int x=10; x<80; x++) {
-    				jc.fillArea((char)Rand.r(256), 
-    						Colours.getColor(Rand.nextInt()), 
-    						Colours.getColor(Rand.nextInt()), 
+    				jc.fillArea((char)r.nextInt(256), 
+    						Colours.getColor(r.nextInt()), 
+    						Colours.getColor(r.nextInt()), 
     						x, y, 1, 1);
     			}
     		}

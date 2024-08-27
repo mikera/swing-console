@@ -1,9 +1,11 @@
-package mikera.gui.demo;
+package mikera.gui.console.demo;
+
+import java.awt.Color;
 
 import javax.swing.JFrame;
 
 import mikera.gui.Frames;
-import mikera.gui.JConsole;
+import mikera.gui.console.JConsole;
 
 public class ScrollDemo {
 
@@ -21,11 +23,11 @@ public class ScrollDemo {
     	long i=0;
     	while (f.isVisible()) {
     		Thread.sleep(10);
-    		jc.scroll(1, 0);
+    		jc.scroll(1, 0); // scroll to the right
     		
     		for (int y=0; y<h; y++) {
     			if (((i>>y)&1)!=0) {
-    				jc.setChar('#', w-1, y);
+    				jc.setChar(' ', Color.BLACK, Color.GREEN, w-1, y);
     			}
     		}
     		i++;

@@ -1,4 +1,4 @@
-package mikera.gui;
+package mikera.gui.console;
 
 import java.awt.Color;
 import java.awt.Dimension;
