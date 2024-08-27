@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 import mikera.gui.Frames;
+import mikera.gui.console.AnsiColour;
 import mikera.gui.console.JConsole;
 
 public class ScrollDemo {
@@ -27,7 +28,7 @@ public class ScrollDemo {
     		
     		for (int y=0; y<h; y++) {
     			if (((i>>y)&1)!=0) {
-    				jc.setChar(' ', Color.BLACK, Color.GREEN, w-1, y);
+    				jc.setChar(' ', Color.BLACK, AnsiColour.get(i%256), w-1, y);
     			}
     		}
     		i++;
